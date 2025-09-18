@@ -1,196 +1,176 @@
-<!doctype html>
-<!--
-  Human-friendly single-file HTML
-  - Clean, readable structure
-  - Semantic elements (header, nav, main, article, footer)
-  - Simple responsive CSS (no frameworks) with helpful comments
-  - Accessible: skip link, landmarks, good color contrast, focus styles
-  - Plenty of inline comments so another human can understand/modify easily
--->
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Human-friendly HTML Example</title>
-  <meta name="description" content="A single-file, human-friendly HTML example with readable markup and comments." />
-
-  <!-- Basic CSS - keep it simple and readable -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Surprise 🎂</title>
   <style>
-    /* ---------- Utilities & reset ---------- */
-    :root{
-      --bg: #f7fafc;      /* light page background */
-      --card: #ffffff;    /* card background */
-      --accent: #2563eb;  /* pleasant blue accent */
-      --muted: #6b7280;   /* muted text */
-      --radius: 12px;
-      --max-width: 900px;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:linear-gradient(180deg, var(--bg), #eaf2ff 60%);
-      color:#0f172a;
-      line-height:1.45;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:24px;
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      gap:16px;
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffe0ec, #ffd8cb);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      color: #6a0572;
+      overflow-x: hidden;
     }
 
-    /* Container to keep content centered and readable */
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-      background:transparent;
+    .container {
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* Header styles */
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:16px;
-    }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:48px;height:48px;border-radius:10px;background:var(--card);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(16,24,40,0.06);
-      font-weight:700;color:var(--accent)
-    }
-    nav a{margin-left:12px;text-decoration:none;color:var(--muted)}
-
-    /* Page card */
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:0 8px 30px rgba(2,6,23,0.06);
+    .reveal-button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 20, 147, 0.5);
+      transition: all 0.3s ease;
+      margin-top: 60px;
     }
 
-    /* Simple grid for main layout */
-    .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:18px;
+    .reveal-button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
     }
 
-    /* Article styles */
-    h1{font-size:1.5rem;margin:0 0 6px}
-    p.lead{color:var(--muted);margin:0 0 14px}
-
-    /* List styles */
-    .bullets{padding-left:18px}
-
-    /* Footer */
-    footer{color:var(--muted);font-size:0.9rem;margin-top:12px}
-
-    /* Focus states for accessibility */
-    a:focus, button:focus, input:focus{outline:3px solid rgba(37,99,235,0.18);outline-offset:3px}
-
-    /* Responsive: make two-column on wider screens */
-    @media(min-width:880px){
-      .grid{grid-template-columns:2fr 1fr}
+    .surprise-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      margin-top: 30px;
     }
 
-    /* Tiny helpers */
-    .muted{color:var(--muted)}
-    .pill{display:inline-block;background:#eef2ff;padding:6px 10px;border-radius:999px;font-size:0.85rem}
-    .small{font-size:0.9rem}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none}
+    .surprise-content.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff1493;
+      margin-bottom: 20px;
+      animation: pop 1.5s infinite alternate;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    .photo {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 5px solid #ff69b4;
+      box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
+      margin: 20px auto;
+    }
+
+    .message {
+      font-size: 1.2em;
+      max-width: 650px;
+      background: #fff0f5;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 1.1em;
+      color: #b30059;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 1em;
+      margin-top: 15px;
+      color: #a9004e;
+    }
+
+    /* Floating hearts animation */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hearts span {
+      position: absolute;
+      display: block;
+      color: #ff1493;
+      animation: floatHearts 10s linear infinite;
+      font-size: 24px;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
-  <a class="skip" href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden">Skip to content</a>
+
+  <!-- Floating hearts -->
+  <div class="hearts">
+    <span style="left: 5%;">❤</span>
+    <span style="left: 15%;">💖</span>
+    <span style="left: 25%;">💗</span>
+    <span style="left: 35%;">💕</span>
+    <span style="left: 45%;">💞</span>
+    <span style="left: 55%;">💘</span>
+    <span style="left: 65%;">❤</span>
+    <span style="left: 75%;">💖</span>
+    <span style="left: 85%;">💗</span>
+    <span style="left: 95%;">💕</span>
+  </div>
 
   <div class="container">
+    <button class="reveal-button" onclick="revealSurprise()">🎁 Click to Reveal Your Surprise 🎁</button>
 
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden>HF</div>
-        <div>
-          <div style="font-weight:700">Human-friendly Demo</div>
-          <div class="muted small">Single-file HTML — easy to read & edit</div>
-        </div>
+    <div class="surprise-content" id="surpriseContent">
+      <h1>🎉 Happy Birthday, Sister! 🎉</h1>
+      <img src="photo.jpg" alt="Sister's Photo" class="photo" />
+
+      <div class="message">
+        <p>Dear Sister,</p>
+        <p>Wishing you a birthday as sweet, bright, and beautiful as you are! You light up our lives in every way, and today is all about celebrating YOU 💕</p>
+        <p>🎂 May this year bring you endless happiness and success. 🎂</p>
+        <p>You're not just my sister, you're my best friend forever 💝</p>
       </div>
 
-      <nav aria-label="Main navigation">
-        <a href="#features">Features</a>
-        <a href="#usage">How to use</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <!-- Main content area: semantic landmark for screen readers -->
-    <main id="main">
-      <section class="card grid" aria-labelledby="page-title">
-
-        <!-- Primary column -->
-        <article>
-          <h1 id="page-title">Human-friendly single-file HTML</h1>
-          <p class="lead">This example is intentionally plain, commented, and small so you can copy it, tweak the text, or use it as the starting point for a project.</p>
-
-          <h2 id="features">What you'll find here</h2>
-          <ul class="bullets">
-            <li><strong>Readable structure</strong> — clear comments and semantic tags.</li>
-            <li><strong>Responsive layout</strong> — single column on mobile, two columns on desktop.</li>
-            <li><strong>Accessible</strong> — keyboard-friendly focus styles & landmarks.</li>
-          </ul>
-
-          <h2 id="usage">How to use</h2>
-          <ol class="bullets">
-            <li>Copy this file into <code>index.html</code>.</li>
-            <li>Open it in a browser, or serve it from a simple static server (e.g., <code>python -m http.server</code>).</li>
-            <li>Edit the content, swap colors, or add components as you need. The CSS is grouped at the top for easy tweaks.</li>
-          </ol>
-
-          <h2>Example component — a simple card</h2>
-          <div style="margin-top:12px;padding:12px;border-radius:10px;background:#f8fafc;border:1px solid rgba(15,23,42,0.03)">
-            <strong>Tip:</strong> Keep components small and well-commented so they're easy to reuse.
-            <p class="small muted" style="margin:8px 0 0">This is a tiny example component — change text and styles freely.</p>
-          </div>
-
-          <!-- Conclusion: short and human-friendly -->
-          <h2>Conclusion</h2>
-          <p class="small">This file is meant to be a friendly starting point. If you want: more components, a dark mode, or integration with a small JS snippet (modal, tabs), I can add those next.</p>
-
-        </article>
-
-        <!-- Secondary column: quick links + contact -->
-        <aside class="muted small" style="padding-left:10px">
-          <div style="margin-bottom:12px">
-            <div class="pill">Quick links</div>
-            <ul style="margin:8px 0 0;padding-left:18px">
-              <li><a href="#features">Features</a></li>
-              <li><a href="#usage">How to use</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-
-          <div style="margin-top:8px">
-            <strong>Contact</strong>
-            <p class="small muted">Want more changes? Email <a href="mailto:hello@example.com">hello@example.com</a> or replace with your address.</p>
-            <p><a class="btn" href="#">Get started</a></p>
-          </div>
-
-          <div style="margin-top:14px;font-size:0.85rem;color:#374151">
-            <strong>Notes for humans</strong>
-            <p class="small muted" style="margin:6px 0 0">- Keep CSS near the top for quick edits.<br>- Use meaningful class names (e.g., <code>.card</code>, <code>.brand</code>) to make scanning easier.</p>
-          </div>
-        </aside>
-
-      </section>
-
-      <footer class="muted small" id="contact">
-        <p style="margin:6px 0 0">Made with care • Edit freely • Built for readability</p>
-      </footer>
-    </main>
-
+      <div class="footer">
+        — With Lots of Love, Your Brother 💌
+      </div>
+    </div>
   </div>
+
+  <script>
+    function revealSurprise() {
+      document.getElementById("surpriseContent").classList.add("show");
+    }
+  </script>
 </body>
 </html>
